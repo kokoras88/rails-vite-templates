@@ -3,7 +3,7 @@ run "if uname | grep -q 'Darwin'; then pgrep spring | xargs kill -9; fi"
 # Gemfile
 ########################################
 inject_into_file "Gemfile", after: 'gem "debug", platforms: %i[ mri mingw x64_mingw ]' do
-  <<~RUBY
+  <<-RUBY
     gem "dotenv-rails"
     
     gem 'rubocop', require: false
