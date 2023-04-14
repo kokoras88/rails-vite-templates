@@ -28,6 +28,8 @@ inject_into_file "Gemfile", before: "group :development, :test do" do
 end
 
 gsub_file("Gemfile", '# gem "sassc-rails"', 'gem "sassc-rails"')
+gsub_file("Gemfile", '%i[ mingw mswin x64_mingw jruby ]', '%i[mingw mswin x64_mingw jruby]')
+gsub_file("Gemfile", '%i[ mri mingw x64_mingw ]', '%i[mri mingw x64_mingw]')
 
 # Assets
 ########################################
@@ -166,6 +168,8 @@ after_bundle do
   ########################################
   rails_command "db:drop db:create db:migrate"
   generate(:controller, "pages", "home", "--skip-routes", "--no-test-framework")
+  gsub_file("app/controllers/pages_controller.rb", /home\s*end/, "home() end")
+  
   gsub_file(
     "app/views/pages/home.html.erb",
     '<h1>Pages#home</h1>',
