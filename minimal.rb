@@ -130,8 +130,8 @@ after_bundle do
   ########################################
   inject_into_file "app/javascript/entrypoints/application.js", before: "// To see this message, add the following to the `<head>` section in your" do
     <<~JS
-      import "../javascript/application"
-      import "../assets/stylesheets/application.scss"
+      import "../application"
+      import "../../assets/stylesheets/application.scss"
       
     JS
   end
