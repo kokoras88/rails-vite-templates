@@ -20,9 +20,6 @@ AllCops:
 Bundler/OrderedGems:
   Enabled: false
 
-Layout/LineLength:
-  Max: 120
-
 Lint/MissingSuper:
   Enabled: false
 
@@ -39,8 +36,6 @@ Style/ClassAndModuleChildren:
   Enabled: false
 Style/ConditionalAssignment:
   Enabled: false
-Style/EmptyMethod:
-  Enabled: true
 Style/Documentation:
   Enabled: false
 Style/FrozenStringLiteralComment:
@@ -49,14 +44,11 @@ Style/MissingRespondToMissing:
   Enabled: false
 Style/MutableConstant:
   Enabled: false
-Style/RedundantReturn:
-  Enabled: true
 Style/RegexpLiteral:
   AllowInnerSlashes: true
   EnforcedStyle: mixed
 Style/SignalException:
   Enabled: false
 Style/StringLiterals:
-  Enabled: false
-Style/WordArray:
   Enabled: true
+  EnforcedStyle: double_quotes
