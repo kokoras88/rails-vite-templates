@@ -1,0 +1,62 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+  Exclude:
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'node_modules/**/*'
+    - 'resources/**/*'
+    - 'script/**/*'
+    - 'support/**/*'
+    - 'tmp/**/*'
+    - 'test/**/*'
+    - 'vendor/**/*'
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Layout/LineLength:
+  Max: 120
+
+Lint/MissingSuper:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+Metrics/ClassLength:
+  CountAsOne: ["array", "hash", "heredoc"]
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/MethodLength:
+  CountAsOne: ["array", "hash", "heredoc"]
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/ConditionalAssignment:
+  Enabled: false
+Style/EmptyMethod:
+  Enabled: true
+Style/Documentation:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/MissingRespondToMissing:
+  Enabled: false
+Style/MutableConstant:
+  Enabled: false
+Style/RedundantReturn:
+  Enabled: true
+Style/RegexpLiteral:
+  AllowInnerSlashes: true
+  EnforcedStyle: mixed
+Style/SignalException:
+  Enabled: false
+Style/StringLiterals:
+  Enabled: false
+Style/WordArray:
+  Enabled: true
