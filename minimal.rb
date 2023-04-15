@@ -17,11 +17,12 @@ inject_into_file "Gemfile", before: "group :development, :test do" do
   <<~RUBY
     # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
     gem "turbo-rails"
+    
     # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
     gem "stimulus-rails"
-    gem "vite_rails"
     
-    gem "vite_ruby"
+    # Vite.js integration in Ruby web apps [https://vite-ruby.netlify.app/]
+    gem "vite_rails"
     
     gem "autoprefixer-rails"
     
