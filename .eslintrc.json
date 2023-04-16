@@ -11,7 +11,7 @@
   },
   "ignorePatterns": [
     "application.js",
-    "index.js",
+    "index.js"
   ],
   "rules": {
     "arrow-parens": "off",
