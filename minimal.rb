@@ -129,17 +129,14 @@ after_bundle do
 
   # Vite entrypoints
   ########################################
-  gsub_file("config/vite.json", '"sourceCodeDir": "app/javascript"', '"sourceCodeDir": "app"')
-  run "mv app/javascript/entrypoints app/entrypoints"
-
-  inject_into_file "app/entrypoints/application.js", before: "// To see this message, add the following to the `<head>` section in your" do
+  inject_into_file "app/javascript/entrypoints/application.js", before: "// To see this message, add the following to the `<head>` section in your" do
     <<~JS
-      import "../javascript/application"
+      import "../application"
       
     JS
   end
   
-  file "app/entrypoints/application.scss", '@import "../assets/stylesheets/application";', force: true
+  file "app/javasript/entrypoints/application.scss", '@import "../assets/stylesheets/application";', force: true
   
   gsub_file(
     "app/views/layouts/application.html.erb",
