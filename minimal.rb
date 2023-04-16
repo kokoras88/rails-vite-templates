@@ -231,7 +231,7 @@ after_bundle do
 
   # Github action
   ########################################
-  run "mkdir -p .github/workflows && touch .github/workflows/rubocop.yml"
+  run "mkdir .github/workflows"
   run "curl -L https://raw.githubusercontent.com/wJoenn/rails-vite-templates/master/linter.yml > .github/workflows/linter.yml"
 
   # Git
