@@ -7,9 +7,9 @@ inject_into_file "Gemfile", after: 'gem "debug", platforms: %i[ mri mingw x64_mi
   
   gem "dotenv-rails"
     
-  gem 'rubocop', require: false
-  gem 'rubocop-performance', require: false
-  gem 'rubocop-rails', require: false
+  gem "rubocop", require: false
+  gem "rubocop-performance", require: false
+  gem "rubocop-rails", require: false
   RUBY
 end
 
@@ -31,7 +31,7 @@ end
 
 gsub_file("Gemfile", '# gem "sassc-rails"', 'gem "sassc-rails"')
 gsub_file("Gemfile", '%i[ mingw mswin x64_mingw jruby ]', '%i[mingw mswin x64_mingw jruby]')
-gsub_file("Gemfile", '%i[ mri mingw x64_mingw ]', '%i[mri mingw x64_mingw]')
+gsub_file("Gemfile", /%i[ mri mingw x64_mingw ] */, '%i[mri mingw x64_mingw]')
 
 # Assets
 ########################################
