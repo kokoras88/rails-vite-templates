@@ -229,11 +229,6 @@ after_bundle do
   EOF
   file "Procfile.dev", procfile, force: true
 
-  # Github action
-  ########################################
-  run "mkdir -p .github/workflows"
-  run "curl -L https://raw.githubusercontent.com/wJoenn/rails-vite-templates/master/linter.yml > .github/workflows/linter.yml"
-
   # Git
   ########################################
   git :init
