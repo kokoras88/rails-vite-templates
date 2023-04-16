@@ -21,3 +21,10 @@ rails new \
 Same as minimal **plus** a Devise install with a generated `User` model.
 
 **Coming soon**
+
+## Github actions
+To install actions on pull requests for rubocop and esLint run those commands from your root repository
+```
+run "mkdir -p .github/workflows"
+run "curl -L https://raw.githubusercontent.com/wJoenn/rails-vite-templates/master/linter.yml > .github/workflows/linter.yml"
+```
