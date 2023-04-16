@@ -6,7 +6,7 @@ inject_into_file "Gemfile", after: 'gem "debug", platforms: %i[ mri mingw x64_mi
   <<-RUBY.chomp
   
   gem "dotenv-rails"
-    
+
   gem "rubocop", require: false
   gem "rubocop-performance", require: false
   gem "rubocop-rails", require: false
