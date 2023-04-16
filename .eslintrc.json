@@ -11,8 +11,7 @@
   },
   "ignorePatterns": [
     "application.js",
-    "controllers/index.js",
-    "controllers/application.js"
+    "index.js",
   ],
   "rules": {
     "arrow-parens": "off",
