@@ -201,7 +201,12 @@ after_bundle do
 
   # Rubocop
   ########################################
-  run "curl -L https://raw.githubusercontent.com/wJoenn/rails-templates/master/.rubocop.yml > .rubocop.yml"
+  run "curl -L https://raw.githubusercontent.com/wJoenn/rails-vite-templates/master/.rubocop.yml > .rubocop.yml"
+  
+  # EsLint
+  ########################################
+  run "yarn add -D eslint eslint-config-airbnb-base eslint-plugin-import"
+  run "curl -L https://raw.githubusercontent.com/wJoenn/rails-vite-templates/master/.eslintrc.json > .eslintrc.json"
   
   # Bin Dev
   ########################################
@@ -227,29 +232,7 @@ after_bundle do
   # Github action
   ########################################
   run "mkdir -p .github/workflows && touch .github/workflows/rubocop.yml"
-  rubocop_action = <<~YML
-    ---
-    name: RuboCop
-    on:
-      pull_request:
-      push:
-        branches: [main]
-    jobs:
-      rubocop:
-        # Ruby static code analyzer and formatter
-        # https://github.com/rubocop/rubocop
-        name: RuboCop
-        runs-on: ubuntu-latest
-        steps:
-          - uses: actions/checkout@v3
-          - name: Setup Ruby
-            uses: ruby/setup-ruby@v1
-            with:
-              bundler-cache: true
-          - name: Run RuboCop
-            run: bundle exec rubocop
-    YML
-  file ".github/workflows/rubocop.yml", rubocop_action, force: true
+  run "curl -L https://raw.githubusercontent.com/wJoenn/rails-vite-templates/master/linter.yml > .github/workflows/linter.yml"
 
   # Git
   ########################################
