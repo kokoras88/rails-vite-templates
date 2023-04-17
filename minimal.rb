@@ -146,7 +146,7 @@ after_bundle do
     JS
   end
   
-  file "app/javascript/entrypoints/application.scss", '@import "../stylesheets/application";', force: true
+  file "app/frontend/entrypoints/application.scss", '@import "../stylesheets/application";', force: true
   
   gsub_file(
     "app/views/layouts/application.html.erb",
