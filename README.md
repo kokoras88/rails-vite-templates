@@ -11,6 +11,7 @@ Get a minimal rails app ready to be deployed on Heroku with Bootstrap, Simple fo
 ```bash
 rails new \
   -d postgresql \
+  --skip-asset-pipeline \
   --skip-javascript \
   -m https://raw.githubusercontent.com/wJoenn/rails-vite-templates/master/minimal.rb \
   CHANGE_THIS_TO_YOUR_RAILS_APP_NAME
