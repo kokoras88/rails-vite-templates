@@ -33,7 +33,7 @@ gsub_file("Gemfile", /%i\[ mri mingw x64_mingw \] */, '%i[mri mingw x64_mingw]')
 # Assets
 ########################################
 run "rm -rf vendor"
-run "mkdir frontend"
+run "mkdir app/frontend"
 run "mv app/assets/* app/frontend && rmdir app/assets"
 run "mv app/frontend/stylesheets/application.css app/frontend/stylesheets/application.scss"
 run "mkdir -p app/frontend/stylesheets/config && touch app/frontend/stylesheets/config/_setup.scss"
