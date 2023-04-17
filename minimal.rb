@@ -24,31 +24,32 @@ inject_into_file "Gemfile", before: "group :development, :test do" do
     # Vite.js integration in Ruby web apps [https://vite-ruby.netlify.app/]
     gem "vite_rails"
     
-    gem "autoprefixer-rails"
-    
   RUBY
 end
 
-gsub_file("Gemfile", '# gem "sassc-rails"', 'gem "sassc-rails"')
 gsub_file("Gemfile", '%i[ mingw mswin x64_mingw jruby ]', '%i[mingw mswin x64_mingw jruby]')
 gsub_file("Gemfile", /%i\[ mri mingw x64_mingw \] */, '%i[mri mingw x64_mingw]')
 
 # Assets
 ########################################
 run "rm -rf vendor"
-run "mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss"
-run "mkdir -p app/assets/stylesheets/config && touch app/assets/stylesheets/config/_setup.scss"
-run "mkdir -p app/assets/stylesheets/components && touch app/assets/stylesheets/components/_index.scss"
-run "mkdir -p app/assets/stylesheets/pages && touch app/assets/stylesheets/pages/_index.scss"
+run "mkdir frontend"
+run "mv app/assets/* app/frontend && rmdir app/assets"
+run "mv app/frontend/stylesheets/application.css app/frontend/stylesheets/application.scss"
+run "mkdir -p app/frontend/stylesheets/config && touch app/frontend/stylesheets/config/_setup.scss"
+run "mkdir -p app/frontend/stylesheets/components && touch app/frontend/stylesheets/components/_index.scss"
+run "mkdir -p app/frontend/stylesheets/pages && touch app/frontend/stylesheets/pages/_index.scss"
 application_css = <<~CSS
   // Config files
   @import "config/setup";
+  
   // External libraries
+  
   // Your CSS Partials
   @import "pages/index";
   @import "components/index";
 CSS
-file "app/assets/stylesheets/application.scss", application_css, force: true
+file "app/frontend/stylesheets/application.scss", application_css, force: true
 
 setup_css = <<-CSS
 body {
@@ -56,7 +57,7 @@ body {
   color: lightgrey;
 }
 CSS
-file "app/assets/stylesheets/config/_setup.scss", setup_css, force: true
+file "app/frontend/stylesheets/config/_setup.scss", setup_css, force: true
 
 # Layout
 ########################################
@@ -98,8 +99,6 @@ JSON
 file "package.json", package_json, force: true
 run "yarn add autoprefixer"
 
-run "mkdir -p app/javascript && touch app/javascript/application.js"
-
 ########################################
 # After bundle
 ########################################
@@ -115,29 +114,39 @@ after_bundle do
     import {defineConfig} from 'vite'
     import FullReload from "vite-plugin-full-reload"
     import RubyPlugin from 'vite-plugin-ruby'
-    // import StimulusHMR from 'vite-plugin-stimulus-hmr'
+    import StimulusHMR from 'vite-plugin-stimulus-hmr'
     
     export default defineConfig({
       clearScreen: false,
       plugins: [
         RubyPlugin(), 
-        // StimulusHMR(), 
+        StimulusHMR(), 
         FullReload(["config/routes.rb", "app/views/**/*"], {delay: 200}),
       ],
     })
   JS
   file "vite.config.ts", vite_config_ts, force: true
-
-  # Vite entrypoints
+  
+  # Turbo
   ########################################
-  inject_into_file "app/javascript/entrypoints/application.js", before: "// To see this message, add the following to the `<head>` section in your" do
+  run "mkdir -p app/javascript && touch app/javascript/application.js"
+  run "rails turbo:install"
+  
+  # Stimulus
+  #######################################
+  run "rails stimulus:install"
+  run "mv app/javascript app/frontend"
+
+  # Entrypoints
+  ########################################
+  inject_into_file "app/frontend/entrypoints/application.js", before: "// To see this message, add the following to the `<head>` section in your" do
     <<~JS
-      import "../application"
+      import "../javascript/application"
       
     JS
   end
   
-  file "app/javascript/entrypoints/application.scss", '@import "../../assets/stylesheets/application";', force: true
+  file "app/javascript/entrypoints/application.scss", '@import "../stylesheets/application";', force: true
   
   gsub_file(
     "app/views/layouts/application.html.erb",
@@ -155,14 +164,6 @@ after_bundle do
     }
   JS
   file "postcss.config.js", postcss_config_js, force: true
-  
-  # Turbo
-  ########################################
-  run "rails turbo:install"
-  
-  # Stimulus
-  #######################################
-  run "rails stimulus:install"
   
   # Generators: db + simple form + pages controller
   ########################################
