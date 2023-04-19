@@ -61,7 +61,6 @@ file "app/frontend/stylesheets/config/_setup.scss", setup_css, force: true
 
 # Layout
 ########################################
-
 gsub_file(
   "app/views/layouts/application.html.erb",
   '<meta name="viewport" content="width=device-width,initial-scale=1">',
@@ -85,7 +84,6 @@ generators = <<~RUBY
     generate.test_framework :test_unit, fixture: false
   end
 RUBY
-
 environment generators
 
 # Yarn Init
@@ -234,5 +232,5 @@ after_bundle do
   ########################################
   git :init
   git add: "."
-  git commit: "-m 'Initial commit with minimal template from https://github.com/wJoenn/rails-templates'"
+  git commit: "-m 'Initial commit with minimal template from https://github.com/wJoenn/rails-vite-templates'"
 end
