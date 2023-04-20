@@ -70,8 +70,8 @@ gsub_file(
 # README
 ########################################
 markdown_file_content = <<~MARKDOWN
-  Rails app generated with [wJoenn/rails-templates](https://github.com/wJoenn/rails-templates).
-  This is a fork by [Louis Ramos](https://louisramos.dev) from a template created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+  Rails app generated with [wJoenn/rails-vite-templates](https://github.com/wJoenn/rails-vite-templates).
+  This is a template by [Louis Ramos](https://louisramos.dev) inspired by [Le Wagon coding bootcamp](https://www.lewagon.com).
 MARKDOWN
 file "README.md", markdown_file_content, force: true
 
@@ -236,5 +236,5 @@ after_bundle do
   ########################################
   git :init
   git add: "."
-  git commit: "-m 'Initial commit with minimal template from https://github.com/wJoenn/rails-vite-templates'"
+  git commit: "-m 'Initial commit with stimulus template from https://github.com/wJoenn/rails-vite-templates'"
 end
