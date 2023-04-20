@@ -91,7 +91,11 @@ environment generators
 package_json = <<~JSON
   {
     "name": "app",
-    "private": "true"
+    "private": "true",
+    "scripts": {
+      "lint": "eslint --ext .js . --max-warnings=0",
+      "vite:install": "yarn"
+    }
   }
 JSON
 file "package.json", package_json, force: true
