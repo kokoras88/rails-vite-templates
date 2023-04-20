@@ -123,7 +123,7 @@ after_bundle do
       ],
     })
   JS
-  file "vite.config.ts", vite_config_ts, force: true
+  file "vite.config.js", vite_config_ts, force: true
   
   # Turbo
   ########################################
