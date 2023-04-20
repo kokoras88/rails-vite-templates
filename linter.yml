@@ -29,6 +29,6 @@ jobs:
         with:
           node-version: '16'
       - name: Install dependencies
-        run: yarn install
+        run: yarn vite:install
       - name: Run ESLint
-        run: yarn eslint --ext .js . --max-warnings=0
+        run: yarn lint
