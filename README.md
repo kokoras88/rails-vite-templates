@@ -4,7 +4,7 @@ Quickly generate a Rails app with Stimulus and Scss bundled by Vite.js using [Ra
 
 ⚠️ The following templates have been made for Rails 7.
 
-## Minimal
+## Rails full-stack + Turbo Stimulus
 
 Get a minimal rails app ready to be deployed on Heroku with Bootstrap, Simple form and debugging gems.
 
@@ -13,13 +13,11 @@ rails new \
   -d postgresql \
   --skip-asset-pipeline \
   --skip-javascript \
-  -m https://raw.githubusercontent.com/wJoenn/rails-vite-templates/master/minimal.rb \
+  -m https://raw.githubusercontent.com/wJoenn/rails-vite-templates/master/stimulus.rb \
   CHANGE_THIS_TO_YOUR_RAILS_APP_NAME
 ```
 
-## Devise
-
-Same as minimal **plus** a Devise install with a generated `User` model.
+## Rails API + ViteVue
 
 **Coming soon**
 
