@@ -31,4 +31,4 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Run ESLint
-        run: yarn eslint --ext .js .
+        run: yarn eslint --ext .js . --max-warnings=0
