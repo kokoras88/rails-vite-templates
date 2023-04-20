@@ -119,7 +119,7 @@ after_bundle do
   ########################################
   run "git clone git@github.com:wJoenn/vue-boilerplate.git frontend"
   run "yarn vite:install"
-  run "git remote remove origin"
+  run "cd frontend && git remote remove origin"
   run "cd .."
 
   # Git
