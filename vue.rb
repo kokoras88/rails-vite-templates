@@ -6,6 +6,7 @@ inject_into_file "Gemfile", after: 'gem "debug", platforms: %i[ mri mingw x64_mi
   <<-RUBY.chomp
   
   gem "dotenv-rails"
+
   gem "rubocop", require: false
   gem "rubocop-performance", require: false
   gem "rubocop-rails", require: false
@@ -37,7 +38,7 @@ package_json = <<~JSON
       "lint": "cd frontend && yarn eslint --ext .js,.vue . --max-warnings=0",
       "vite:install": "cd frontend && yarn",
       "vite:serve": "cd frontend && vite",
-      "vite:build": "cd frontend && vite build",
+      "vite:build": "cd frontend && vite build"
     }
   }
 JSON
