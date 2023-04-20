@@ -19,7 +19,13 @@ rails new \
 
 ## Rails API + ViteVue
 
-**Coming soon**
+```bash
+rails new \
+  -d postgresql \
+  --api \
+  -m https://raw.githubusercontent.com/wJoenn/rails-vite-templates/master/vue.rb \
+  CHANGE_THIS_TO_YOUR_RAILS_APP_NAME
+```
 
 ## Github actions
 To install actions on pull requests for rubocop and esLint run those commands from your root repository
