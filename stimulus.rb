@@ -164,7 +164,7 @@ after_bundle do
   JS
   file "postcss.config.js", postcss_config_js, force: true
   
-  # Generators: db + simple form + pages controller
+  # Generators: db + pages controller
   ########################################
   rails_command "db:drop db:create db:migrate"
   generate(:controller, "pages", "home", "--skip-routes", "--no-test-framework")
