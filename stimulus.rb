@@ -27,9 +27,6 @@ inject_into_file "Gemfile", before: "group :development, :test do" do
   RUBY
 end
 
-gsub_file("Gemfile", '%i[ mingw mswin x64_mingw jruby ]', '%i[mingw mswin x64_mingw jruby]')
-gsub_file("Gemfile", /%i\[ mri mingw x64_mingw \] */, '%i[mri mingw x64_mingw]')
-
 # Assets
 ########################################
 run "rm -rf vendor"
