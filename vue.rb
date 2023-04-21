@@ -13,8 +13,6 @@ inject_into_file "Gemfile", after: 'gem "debug", platforms: %i[ mri mingw x64_mi
   RUBY
 end
 
-gsub_file("Gemfile", '%i[ mingw mswin x64_mingw jruby ]', '%i[mingw mswin x64_mingw jruby]')
-gsub_file("Gemfile", /%i\[ mri mingw x64_mingw \] */, '%i[mri mingw x64_mingw]')
 gsub_file("Gemfile", '# gem "rack-cors"', 'gem "rack-cors"')
 
 # Assets
