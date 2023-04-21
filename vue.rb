@@ -35,14 +35,16 @@ package_json = <<~JSON
     "name": "app",
     "private": "true",
     "scripts": {
-      "lint": "cd frontend && yarn eslint --ext .js,.vue . --max-warnings=0",
-      "vite:install": "cd frontend && yarn",
+      "dev": "concurrently --kill-others -n Rails:api,Vite:frontend -c red,green \"rails s\" \"yarn vite:serve\"",
+      slint": "cd frontend && yarn eslint --ext .js,.vue . --max-warnings=0",
       "vite:serve": "cd frontend && vite",
-      "vite:build": "cd frontend && vite build"
+      "vite:build": "cd frontend && vite build",
+      "vite:install": "cd frontend && yarn"
     }
   }
 JSON
 file "package.json", package_json, force: true
+run "yarn add -D concurrently"
 
 ########################################
 # After bundle
@@ -51,8 +53,11 @@ after_bundle do
    # Gitignore
   ########################################
   append_file ".gitignore", <<~TXT
+    /node_modules
+
     # Ignore .env file containing credentials.
     .env*
+
     # Ignore Mac and Linux file system files
     *.swp
     .DS_Store
