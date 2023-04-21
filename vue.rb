@@ -36,7 +36,7 @@ package_json = <<~JSON
     "private": "true",
     "scripts": {
       "dev": "concurrently --kill-others -n Rails:api,Vite:frontend -c red,green \"rails s\" \"yarn vite:serve\"",
-      slint": "cd frontend && yarn eslint --ext .js,.vue . --max-warnings=0",
+      "lint": "cd frontend && yarn eslint --ext .js,.vue . --max-warnings=0",
       "vite:serve": "cd frontend && vite",
       "vite:build": "cd frontend && vite build",
       "vite:install": "cd frontend && yarn"
