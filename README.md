@@ -4,9 +4,9 @@ Quickly generate a Rails app with Stimulus and Scss bundled by Vite.js using [Ra
 
 ⚠️ The following templates have been made for Rails 7.
 
-## Rails full-stack + Turbo Stimulus
+## Rails Full-Stack
 
-Get a minimal rails app ready to be deployed on Heroku with Bootstrap, Simple form and debugging gems.
+Get a Rails app ready to be deployed on Heroku with Stimulus, SCSS and Vite's HMR for development.
 
 ```bash
 rails new \
@@ -18,6 +18,8 @@ rails new \
 ```
 
 ## Rails API + ViteVue
+
+Get a monorepo Rails api with a Vue3 + Vite frontend directory ready to be deployed on heroku.
 
 ```bash
 rails new \
