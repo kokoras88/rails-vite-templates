@@ -118,6 +118,10 @@ after_bundle do
   RUBY
   file "config/initializers/cors.rb", rack_cors_config, force: true
   
+  # Generators: db
+  ########################################
+  rails_command "db:drop db:create db:migrate"
+  
   # Install Vue
   ########################################
   run "git clone git@github.com:wJoenn/vue-boilerplate.git frontend"
