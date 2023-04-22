@@ -95,28 +95,6 @@ after_bundle do
   EOF
   file "bin/deploy", bin_deploy, force: true
   run "chmod +x bin/deploy"
-
-  # Rack Cors
-  ########################################
-  rack_cors_config = <<~RUBY
-    # Be sure to restart your server when you modify this file.
-
-    # Avoid CORS issues when API is called from the frontend app.
-    # Handle Cross-Origin Resource Sharing (CORS) in order to accept cross-origin AJAX requests.
-
-    # Read more: https://github.com/cyu/rack-cors
-
-    Rails.application.config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins "*"
-
-        resource "*",
-          headers: :any,
-          methods: %i[get post put patch delete options head]
-      end
-    end
-  RUBY
-  file "config/initializers/cors.rb", rack_cors_config, force: true
   
   # Generators: db
   ########################################
