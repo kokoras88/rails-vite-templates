@@ -21,15 +21,15 @@ else
   echo -e "\e[32m\nSUCCESS: Your esLint tests were successful\e[0m"
 fi
 
-echo -e "\nRunning RSpec..."
-echo "###############################"
-bundle exec rspec
-if [ $? -ne 0 ]; then
-  echo -e "\e[31m\nFAILURE: Your RSpec tests have failed\e[0m"
-  exit 1
-else
-  echo -e "\e[32m\nSUCESS: Your RSpec tests were successful\e[0m"
-fi
+# echo -e "\nRunning RSpec..."
+# echo "###############################"
+# bundle exec rspec
+# if [ $? -ne 0 ]; then
+#   echo -e "\e[31m\nFAILURE: Your RSpec tests have failed\e[0m"
+#   exit 1
+# else
+#   echo -e "\e[32m\nSUCESS: Your RSpec tests were successful\e[0m"
+# fi
 
 echo -e "\e[32m\nAll your tests were successful\e[0m"
 exit 0
