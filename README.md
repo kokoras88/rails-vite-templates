@@ -34,4 +34,7 @@ To install actions on pull requests for rubocop and esLint run those commands fr
 ```
 mkdir -p .github/workflows
 curl -L https://raw.githubusercontent.com/wJoenn/rails-vite-templates/master/linter.yml > .github/workflows/linter.yml
+
+curl -L https://raw.githubusercontent.com/wJoenn/rails-vite-templates/master/pre-push > .git/hooks/pre-push
+chmod -x .git/hooks/pre-push
 ```
