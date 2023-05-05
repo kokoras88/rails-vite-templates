@@ -39,23 +39,34 @@ run "mv app/frontend/stylesheets/application.css app/frontend/stylesheets/applic
 run "mkdir -p app/frontend/stylesheets/config && touch app/frontend/stylesheets/config/_setup.scss"
 run "mkdir -p app/frontend/stylesheets/components && touch app/frontend/stylesheets/components/_index.scss"
 run "mkdir -p app/frontend/stylesheets/pages && touch app/frontend/stylesheets/pages/_index.scss"
+run "touch app/frontend/stylesheets/config/_variables.scss"
 application_css = <<~CSS
   // Config files
+  @import "config/variables";
   @import "config/setup";
-
+  
   // External libraries
-
+  
   // Your CSS Partials
   @import "pages/index";
   @import "components/index";
 CSS
 file "app/frontend/stylesheets/application.scss", application_css, force: true
 
-setup_css = <<-CSS
-body {
-  background-color: #181a1b;
-  color: lightgrey;
-}
+setup_css = <<~CSS
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  *, *::after, *::before {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #181818;
+    color: #e3e3e3;
+  }
 CSS
 file "app/frontend/stylesheets/config/_setup.scss", setup_css, force: true
 
@@ -70,9 +81,10 @@ gsub_file(
 # Flashes
 ########################################
 inject_into_file "app/views/layouts/application.html.erb", after: "<body>" do
-  <<~HTML
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+  <<-HTML
+
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
   HTML
 end
 
@@ -121,22 +133,23 @@ after_bundle do
 
   # Vite Config
   ########################################
-  vite_config_ts = <<~JS
+  vite_config_js = <<~JS
     import { defineConfig } from "vite"
     import FullReload from "vite-plugin-full-reload"
     import RubyPlugin from "vite-plugin-ruby"
     import StimulusHMR from "vite-plugin-stimulus-hmr"
-
+    
     export default defineConfig({
       clearScreen: false,
       plugins: [
-        RubyPlugin(),
-        StimulusHMR(),
+        RubyPlugin(), 
+        StimulusHMR(), 
         FullReload(["config/routes.rb", "app/views/**/*"], { delay: 200 }),
       ],
     })
   JS
-  file "vite.config.js", vite_config_ts, force: true
+  file "vite.config.js", vite_config_js, force: true
+  run "rm vite.config.ts"
 
   # Turbo
   ########################################
@@ -202,10 +215,9 @@ after_bundle do
   run "rm app/controllers/pages_controller.rb"
   file "app/controllers/pages_controller.rb", <<~RUBY
     class PagesController < ApplicationController
-      skip_before_action :authenticate_user!, only: [ :home ]
+      skip_before_action :authenticate_user!, only: %i[home]
 
-      def home
-      end
+      def home() end
     end
   RUBY
 
@@ -241,12 +253,12 @@ after_bundle do
 
   # Rubocop
   ########################################
-  run "curl -L https://raw.githubusercontent.com/wJoenn/rails-vite-templates/master/resources.rubocop.yml > .rubocop.yml"
+  run "curl -L https://raw.githubusercontent.com/wJoenn/rails-vite-templates/master/resources/.rubocop.yml > .rubocop.yml"
 
   # EsLint
   ########################################
   run "yarn add -D eslint eslint-config-airbnb-base eslint-plugin-import"
-  run "curl -L https://raw.githubusercontent.com/wJoenn/rails-vite-templates/master/resources.eslintrc.json > .eslintrc.json"
+  run "curl -L https://raw.githubusercontent.com/wJoenn/rails-vite-templates/master/resources/.eslintrc.json > .eslintrc.json"
 
   # Bin Dev
   ########################################
