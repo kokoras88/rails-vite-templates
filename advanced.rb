@@ -83,8 +83,8 @@ gsub_file(
 inject_into_file "app/views/layouts/application.html.erb", after: "<body>" do
   <<-HTML
 
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
   HTML
 end
 
