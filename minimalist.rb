@@ -48,8 +48,8 @@ file "app/frontend/stylesheets/application.scss", application_css, force: true
 
 setup_css = <<-CSS
 * {
-  margin: 0,
-  padding: 0
+  margin: 0;
+  padding: 0;
 }
 
 *, *::after, *::before {
@@ -58,7 +58,7 @@ setup_css = <<-CSS
 
 body {
   background-color: #181818;
-  color: €e3e3e3;
+  color: #e3e3e3;
 }
 CSS
 file "app/frontend/stylesheets/config/_setup.scss", setup_css, force: true
@@ -116,7 +116,7 @@ after_bundle do
   
   # Vite Config
   ########################################
-  vite_config_ts = <<~JS
+  vite_config_js = <<~JS
     import { defineConfig } from "vite"
     import FullReload from "vite-plugin-full-reload"
     import RubyPlugin from "vite-plugin-ruby"
@@ -131,7 +131,8 @@ after_bundle do
       ],
     })
   JS
-  file "vite.config.js", vite_config_ts, force: true
+  file "vite.config.js", vite_config_js, force: true
+  run "rm vite.config.ts"
   
   # Turbo
   ########################################
