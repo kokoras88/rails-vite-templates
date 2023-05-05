@@ -24,7 +24,8 @@ Adds some additional tools such as Rubocop, esLint, Devise for authentification 
 ```bash
 rails new \
   -d postgresql \
-  --api \
+  --skip-asset-pipeline \
+  --skip-javascript \
   -m https://raw.githubusercontent.com/wJoenn/rails-vite-templates/master/advanced.rb \
   CHANGE_THIS_TO_YOUR_RAILS_APP_NAME
 ```
