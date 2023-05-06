@@ -4,7 +4,7 @@ run "if uname | grep -q 'Darwin'; then pgrep spring | xargs kill -9; fi"
 ########################################
 inject_into_file "Gemfile", after: 'gem "debug", platforms: %i[ mri mingw x64_mingw ]' do
   <<-RUBY.chomp
-  
+
   gem "dotenv-rails"
   RUBY
 end
@@ -13,13 +13,13 @@ inject_into_file "Gemfile", before: "group :development, :test do" do
   <<~RUBY
     # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
     gem "turbo-rails"
-    
+
     # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
     gem "stimulus-rails"
-    
+
     # Vite.js integration in Ruby web apps [https://vite-ruby.netlify.app/]
     gem "vite_rails"
-    
+
   RUBY
 end
 
@@ -37,29 +37,29 @@ application_css = <<~CSS
   // Config files
   @import "config/variables";
   @import "config/setup";
-  
+
   // External libraries
-  
+
   // Your CSS Partials
   @import "pages/index";
   @import "components/index";
 CSS
 file "app/frontend/stylesheets/application.scss", application_css, force: true
 
-setup_css = <<-CSS
-* {
-  margin: 0;
-  padding: 0;
-}
+setup_css = <<~CSS
+  * {
+    margin: 0;
+    padding: 0;
+  }
 
-*, *::after, *::before {
-  box-sizing: border-box;
-}
+  *, *::after, *::before {
+    box-sizing: border-box;
+  }
 
-body {
-  background-color: #181818;
-  color: #e3e3e3;
-}
+  body {
+    background-color: #181818;
+    color: #e3e3e3;
+  }
 CSS
 file "app/frontend/stylesheets/config/_setup.scss", setup_css, force: true
 
@@ -112,7 +112,7 @@ after_bundle do
   ########################################
   run "bundle exec vite install"
   run "yarn add -D vite-plugin-full-reload vite-plugin-stimulus-hmr sass"
-  
+
   # Vite Config
   ########################################
   vite_config_js = <<~JS
@@ -120,24 +120,24 @@ after_bundle do
     import FullReload from "vite-plugin-full-reload"
     import RubyPlugin from "vite-plugin-ruby"
     import StimulusHMR from "vite-plugin-stimulus-hmr"
-    
+
     export default defineConfig({
       clearScreen: false,
       plugins: [
-        RubyPlugin(), 
-        StimulusHMR(), 
+        RubyPlugin(),
+        StimulusHMR(),
         FullReload(["config/routes.rb", "app/views/**/*"], { delay: 200 }),
       ],
     })
   JS
   file "vite.config.js", vite_config_js, force: true
   run "rm vite.config.ts"
-  
+
   # Turbo
   ########################################
   run "mkdir -p app/javascript && touch app/javascript/application.js"
   run "rails turbo:install"
-  
+
   # Stimulus
   #######################################
   run "rails stimulus:install"
@@ -148,18 +148,18 @@ after_bundle do
   inject_into_file "app/frontend/entrypoints/application.js", before: "// To see this message, add the following to the `<head>` section in your" do
     <<~JS
       import "../javascript/application"
-      
+
     JS
   end
-  
+
   file "app/frontend/entrypoints/application.scss", '@import "../stylesheets/application";', force: true
-  
+
   gsub_file(
     "app/views/layouts/application.html.erb",
     '<%= stylesheet_link_tag "application" %>',
     '<%= vite_stylesheet_tag "application.scss" %>'
   )
-  
+
   # Postcss Config
   ########################################
   postcss_config_js = <<~JS
@@ -170,13 +170,13 @@ after_bundle do
     }
   JS
   file "postcss.config.js", postcss_config_js, force: true
-  
+
   # Generators: db + pages controller
   ########################################
   rails_command "db:drop db:create db:migrate"
   generate(:controller, "pages", "home", "--skip-routes", "--no-test-framework")
   gsub_file("app/controllers/pages_controller.rb", /home\s*end/, "home() end")
-  
+
   gsub_file(
     "app/views/pages/home.html.erb",
     '<h1>Pages#home</h1>',
@@ -205,7 +205,7 @@ after_bundle do
   # Dotenv
   ########################################
   run "touch '.env'"
-  
+
   # Bin Dev
   ########################################
   bin_dev = <<~EOF
@@ -218,7 +218,7 @@ after_bundle do
   EOF
   file "bin/dev", bin_dev, force: true
   chmod "bin/dev", 0755, verbose: false
-  
+
   # Procfile
   ########################################
   procfile = <<~EOF

@@ -6,17 +6,17 @@ AllCops:
   NewCops: enable
   SuggestExtensions: false
   Exclude:
-    - 'Gemfile'
-    - 'bin/**/*'
-    - 'db/**/*'
-    - 'config/**/*'
-    - 'node_modules/**/*'
-    - 'resources/**/*'
-    - 'script/**/*'
-    - 'support/**/*'
-    - 'tmp/**/*'
-    - 'test/**/*'
-    - 'vendor/**/*'
+    - "Gemfile"
+    - "bin/**/*"
+    - "db/**/*"
+    - "config/**/*"
+    - "node_modules/**/*"
+    - "resources/**/*"
+    - "script/**/*"
+    - "support/**/*"
+    - "tmp/**/*"
+    - "test/**/*"
+    - "vendor/**/*"
 
 Layout/ArgumentAlignment:
   EnforcedStyle: with_fixed_indentation
