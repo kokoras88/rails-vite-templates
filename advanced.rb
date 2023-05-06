@@ -213,7 +213,7 @@ after_bundle do
   )
 
   inject_into_file "spec/rails_helper.rb", after: "RSpec.configure do |config|" do
-    <<~RUBY
+    <<-RUBY
 
       config.include Devise::Test::IntegrationHelpers, type: :request
     RUBY
