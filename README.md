@@ -30,12 +30,14 @@ rails new \
   CHANGE_THIS_TO_YOUR_RAILS_APP_NAME
 ```
 
-## Github actions
+## CI/CD
 To install actions on pull requests for rubocop and esLint run those commands from your root repository
 ```bash
 mkdir -p .github/workflows
-curl -L https://raw.githubusercontent.com/wJoenn/rails-vite-templates/master/linter.yml > .github/workflows/linter.yml
-
-curl -L https://raw.githubusercontent.com/wJoenn/rails-vite-templates/master/pre-push > .git/hooks/pre-push
+curl -L https://raw.githubusercontent.com/wJoenn/rails-vite-templates/master/resources/linter.yml > .github/workflows/linter.yml
+```
+For testing on pre-push run those commands from your root repository
+```
+curl -L https://raw.githubusercontent.com/wJoenn/rails-vite-templates/master/resources/pre-push > .git/hooks/pre-push
 chmod -x .git/hooks/pre-push
 ```
