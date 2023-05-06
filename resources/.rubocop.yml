@@ -8,7 +8,7 @@ AllCops:
   Exclude:
     - "Gemfile"
     - "bin/**/*"
-    - "db/schema.rb"
+    - "db/**/*"
     - "config/**/*"
     - "node_modules/**/*"
     - "resources/**/*"
