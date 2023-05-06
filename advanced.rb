@@ -7,6 +7,8 @@ inject_into_file "Gemfile", after: 'gem "debug", platforms: %i[ mri mingw x64_mi
 
   gem "dotenv-rails"
 
+  gem "rspec-rails"
+
   gem "rubocop", require: false
   gem "rubocop-performance", require: false
   gem "rubocop-rails", require: false
@@ -44,9 +46,9 @@ application_css = <<~CSS
   // Config files
   @import "config/variables";
   @import "config/setup";
-  
+
   // External libraries
-  
+
   // Your CSS Partials
   @import "pages/index";
   @import "components/index";
@@ -138,12 +140,12 @@ after_bundle do
     import FullReload from "vite-plugin-full-reload"
     import RubyPlugin from "vite-plugin-ruby"
     import StimulusHMR from "vite-plugin-stimulus-hmr"
-    
+
     export default defineConfig({
       clearScreen: false,
       plugins: [
-        RubyPlugin(), 
-        StimulusHMR(), 
+        RubyPlugin(),
+        StimulusHMR(),
         FullReload(["config/routes.rb", "app/views/**/*"], { delay: 200 }),
       ],
     })
@@ -193,6 +195,30 @@ after_bundle do
   ########################################
   route 'root to: "pages#home"'
 
+  # RSpec
+  ########################################
+  run "rm -rf test"
+  generate("rspec:install")
+  gsub_file("spec/rails_helper.rb","'", '"')
+  gsub_file(
+    "spec/rails_helper.rb",
+    'config.fixture_path = "#{::Rails.root}/spec/fixtures"',
+    'config.fixture_path = Rails.root.join("spec/fixtures")'
+  )
+
+  gsub_file(
+    "config/application.rb",
+    "generate.test_framework :test_unit, fixture: false",
+    "generate.test_framework :rspec"
+  )
+
+  inject_into_file "spec/rails_helper.rb", after: "RSpec.configure do |config|" do
+    <<~RUBY
+
+      config.include Devise::Test::IntegrationHelpers, type: :request
+    RUBY
+  end
+
   # Devise
   ########################################
   generate("devise:install")
@@ -223,7 +249,7 @@ after_bundle do
 
   gsub_file(
     "app/views/pages/home.html.erb",
-    '<h1>Pages#home</h1>',
+    "<h1>Pages#home</h1>",
     '<h1 data-controller="hello">Pages#home</h1>'
    )
 
